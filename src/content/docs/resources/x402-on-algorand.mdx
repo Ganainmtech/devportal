@@ -150,7 +150,7 @@ Decoding the instructions gives us the following:
 }
 ```
 
-Among other chains, the server accepts payment on Algorand. Luckily, the (@x402-avm)[PROVIDE LINK] packages help us with integrating the payment flow directly into our fetch client.
+Among other chains, the server accepts payment on Algorand. Luckily, the [@x402-avm](https://github.com/algorandfoundation/x402/tree/x402-avm) packages help us with integrating the payment flow directly into our fetch client.
 
 ```typescript
 import { config } from "dotenv";
@@ -222,7 +222,7 @@ We will provide the mnemonic for this client in the `.env` file. This file shoul
 We are loading our 25-word mnemonic from the environment. This approach will change shortly and should **NEVER** be done in production!
 :::
 
-The function `registerExactAvmScheme()` allows the `x402Client` to authorize payments on Algorand with the (exact)[PROVIDE LINK TO SPEC] x402 scheme.
+The function `registerExactAvmScheme()` allows the `x402Client` to authorize payments on Algorand with the [exact](https://github.com/algorandfoundation/x402/blob/x402-avm/specs/x402-specification-v2.md#:~:text=6.1%20Exact%20Scheme%20(EVM%20overview)) x402 scheme.
 
 What is happening under the hood:
 
@@ -230,7 +230,7 @@ Looking at the payment instruction above, we see that we are supposed to transfe
 
 We also see that there is a `feePayer` defined. This means that this address will be sponsoring our fees, and we only have to provide the USDC. Hooray!
 
-The `exactAvmScheme` will prepare an (atomic transaction group)[PROVIDE LINK], sign the payment transaction, and send it to the resource server who will delegate it to its registered facilitator. The facilitator will sign the fee sponsoring transaction, execute the group, and inform the resource server if it can verify the payment or has to report an error. The resource server returns the requested resource or an according error message to the client.
+The `exactAvmScheme` will prepare an [atomic transaction group](https://dev.algorand.co/concepts/transactions/atomic-txn-groups/), sign the payment transaction, and send it to the resource server who will delegate it to its registered facilitator. The facilitator will sign the fee sponsoring transaction, execute the group, and inform the resource server if it can verify the payment or has to report an error. The resource server returns the requested resource or an according error message to the client.
 
 We have now executed our very first x402 payment!
 
